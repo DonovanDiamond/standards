@@ -18,7 +18,6 @@ The system used to send/receive the data. A cellular phone call, even if recorde
 # Required field: `type`
 The type of the data sent/received:
 - text
-- media
 - call
 - sms
 - mms
@@ -48,3 +47,45 @@ Example: `+123`.
 The id/number of the remote person/group receiving and sending the information. This does not matter if its incoming or outgoing, it is always the other side.
 Example: `+123` or `whatsapp.group@12345`, etc.
 
+# Required field: `date`
+
+
+# Required field: `content`
+The data that was sent or received. This is an object which contains information as this can change depending on the type of data sent or received.
+Example:
+```json
+{
+    "type": "text",
+    "content": {
+        "body": "hi there",
+    }
+},{
+    "type": "call",
+    "content": {
+        "duration": 132
+    }
+},{
+    "type": "call",
+    "content": {
+        "duration": 0,
+        "type": "missed"
+    }
+},{
+    "type": "text",
+    "content": {
+        "body": "this is awesome",
+        "attachments": ["87216371263.jpeg"]
+    }
+},{
+    "type": "text",
+    "content": {
+        "body": "no it doesnt",
+        "referredMessage": {
+            "type": "text",
+            "content": {
+                "body": "does it work?"
+            }
+        }
+    }
+}
+```
